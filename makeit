@@ -1,0 +1,29 @@
+#!/bin/bash
+
+#zenity --info
+ans=$(zenity --icon=icons8-linux-50 --info --title "Changelog" --extra-button="Change Log" \
+--ok-label="Cancel");
+
+# Make the changelog
+changelog () {
+./changelog.mk
+echo Which update?
+read UPDATE
+git add -A
+git commit -m $UPDATE
+echo  Commiting. Please be patient
+git log --author="Thomas Raines" --pretty=format:"%h %an %ad %s" --date=short > CHANGELOG \
+&& git commit --amend  --no-edit
+echo Clean tree?
+    select yn in "yes" "no"; do
+        case $yn in
+    	yes ) make clean && make mrproper ;break;;
+    	no ) break;;
+        esac;
+    done
+return
+}
+
+if [[ $ans == "Change Log" ]]; then
+	changelog
+fi
