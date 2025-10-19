@@ -14,13 +14,13 @@ git commit -m $UPDATE
 echo  Running changelog a 2nd time to make sure we have the latest commit
 ./changelog.mk
 git commit --amend  --no-edit
-echo Clean tree?
-    select yn in "yes" "no"; do
-        case $yn in
-    	yes ) make clean && make mrproper ;break;;
-    	no ) break;;
-        esac;
-    done
+#echo Clean tree?
+#    select yn in "yes" "no"; do
+#        case $yn in
+#    	yes ) make clean && make mrproper ;break;;
+#    	no ) break;;
+#        esac;
+#    done
 return
 }
 
